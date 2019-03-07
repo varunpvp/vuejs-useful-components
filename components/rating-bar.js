@@ -11,7 +11,6 @@ Vue.component('rating-bar', {
     },
     data() {
         return {
-            rating: this.value,
             starSize: 64,
         }
     },
@@ -20,17 +19,12 @@ Vue.component('rating-bar', {
             <div :style="ratingBarStyle" ></div>
         </div>
         `,
-    watch: {
-        value(newRating) {
-            this.rating = newRating
-        },
-    },
     computed: {
         sizePx() {
             return `${this.starSize}px`
         },
         barSize() {
-            return `${this.rating * this.starSize}px`
+            return `${this.value * this.starSize}px`
         },
         maxBarSize() {
             return `${this.maxStars * this.starSize}px`
@@ -55,8 +49,10 @@ Vue.component('rating-bar', {
     methods: {
         update(event) {
             let newRating = event.offsetX / this.starSize
-            this.rating = Math.min(this.maxStars, Math.ceil(newRating / 0.5) * 0.5)
-            this.$emit('input', this.rating)
+            this.$emit(
+                'input',
+                Math.min(this.maxStars, Math.ceil(newRating / 0.5) * 0.5)
+            )
         },
     },
 });
