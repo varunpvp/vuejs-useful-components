@@ -31,7 +31,7 @@ Vue.component('rating-bar', {
         },
         ratingBgStyle() {
             return {
-                backgroundImage: "url('../assets/images/unstar.png')",
+                backgroundImage: "url('./assets/images/unstar.png')",
                 backgroundSize: "contain",
                 width: this.maxBarSize,
                 height: this.sizePx,
@@ -39,7 +39,7 @@ Vue.component('rating-bar', {
         },
         ratingBarStyle() {
             return {
-                backgroundImage: "url('../assets/images/star.png')",
+                backgroundImage: "url('./assets/images/star.png')",
                 backgroundSize: "auto 100%",
                 width: this.barSize,
                 height: this.sizePx,
