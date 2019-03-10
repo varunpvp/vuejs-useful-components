@@ -1,6 +1,6 @@
 root = true
 
-[*.js]
+[*]
 charset = utf-8
 intent_style = space
 intent_size = 4
