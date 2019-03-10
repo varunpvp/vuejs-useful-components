@@ -2,6 +2,42 @@
 <html>
 <head>
     <meta charset="utf-8">
+
+    <style type="text/css">
+        body {
+            font-family: sans-serif;
+            font-size: 16px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .title {
+            text-transform: uppercase;
+            padding: 3rem 3rem 0 3rem;
+        }
+
+        .content {
+            border: lightgray 1px solid;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                    justify-content: center;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            padding: 1.5rem;
+            margin: 1.5rem;
+        }
+    </style>
+
     <title>Vue Component</title>
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -14,62 +50,88 @@
 <body>
 <div id="app">
 
-    <h2>Enter your name</h2>
-    <textfield title="Your name" v-model="name" ></textfield>
-    <p v-if="name" >Your name is {{ name }}</p>
-    <p v-else >Your name please</p>
+    <h3 class="title text-center" >A set of components to understand and learn core concepts of Vue.js</h3>
 
-    <h2>Select your gender</h2>
-    <radio-group title="Gender" name="gender" :options="this.genderOptions" v-model="gender" ></radio-group>
-    <p v-if="gender != null" >You are {{ genderOptions[gender] }}</p>
+    <div class="content" >
+        <h2>Enter your name</h2>
+        <textfield title="Your name" v-model="name" ></textfield>
+        <p v-if="name" >Your name is {{ name }}</p>
+        <p v-else >Your name please</p>
+    </div>
 
-    <h2>Rate yourself</h2>
-    <rating-bar v-model.number="rating"></rating-bar>
-    <p v-if="rating" >Your rating is {{ rating }}</p>
+    <div class="content" >
+        <h2>Select your gender</h2>
+        <radio-group title="Gender" name="gender" :options="this.genderOptions" v-model="gender" ></radio-group>
+        <p v-if="gender != null" >You are {{ genderOptions[gender] }}</p>
+    </div>
 
-    <h2>Select your developer type</h2>
-    <dropdown name="devType" title="Dev Type" :options="devTypeOptions" v-model="devType" ></dropdown>
-    <p v-if="devType" >You are a {{ devTypeOptions[devType] }}</p>
+    <div class="content" >
+        <h2>Select your skills</h2>
+        <multiple-choice :options="skillOptions" v-model="skills" ></multiple-choice>
+        <p v-if="skills.length" >You know {{ skillsText }}</p>
+    </div>
 
-    <h2>Select your skills</h2>
-    <multiple-choice :options="skillOptions" v-model="skills" ></multiple-choice>
-    <p v-if="skills.length" >You know {{ skillsText }}</p>
+    <div class="content" >
+        <h2>Select your developer type</h2>
+        <dropdown name="devType" title="Dev Type" :options="devTypeOptions" v-model="devType" ></dropdown>
+        <p v-if="devType" >You are a {{ devTypeOptions[devType] }}</p>
+    </div>
+
+    <div class="content" >
+        <h2>Rate yourself</h2>
+        <rating-bar v-model.number="rating"></rating-bar>
+        <p v-if="rating" >Your rating is {{ rating }}</p>
+    </div>
+
+    <div class="content" >
+        <p class="text-center" >If you would like to share any simple Vue components, then you're more then welcome to contribute to this repo or if you don't have any, then what are you waiting for, go ahead and create one.</p>
+    </div>
 
 </div>
 <script type="text/javascript" >
     new Vue({
-        el: '#app',
-        data: {
-            name: '',
-	        genderOptions: {
-	            '0': 'Female',
-	            '1': 'Male',
-	        },
-	        gender: null,
+      el: '#app',
+      data: {
+        /* textfield */
+        name: '',
 
-	        rating: 1,
-
-            devType: null,
-            devTypeOptions: {
-                fullstack: 'Full Stack Developer',
-                frontend: 'Front End Developer',
-                backend: 'Back End Developer',
-            },
-
-            skillOptions: {
-                html: 'HTML',
-                css: 'CSS',
-                js: 'JavaScript',
-                vue: 'Vue.js',
-                laravel: 'Laravel',
-            },
-            skills: [],
+        /* radio-group */
+        genderOptions: {
+          '0': 'Female',
+          '1': 'Male'
         },
-        computed: {
-            skillsText() {
-                return this.skills.map(skill => this.skillOptions[skill]).join(', ');
-            },
+        gender: null,
+
+        /* rating-bar */
+        rating: 1,
+
+        /* dropdown */
+        devType: null,
+        devTypeOptions: {
+          fullstack: 'Full Stack Developer',
+          frontend: 'Front End Developer',
+          backend: 'Back End Developer'
+        },
+
+        /* multiple-choice */
+        skillOptions: {
+          html: 'HTML',
+          css: 'CSS',
+          js: 'JavaScript',
+          vue: 'Vue.js',
+          laravel: 'Laravel'
+        },
+        skills: []
+      },
+      computed: {
+        skillsText: function skillsText() {
+          const _this = this;
+
+          return this.skills.map(function (skill) {
+            return _this.skillOptions[skill];
+          }).join(', ');
         }
+      }
     });
 </script>
 </body>
