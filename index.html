@@ -7,6 +7,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript" src="components/radio-group.js"></script>
     <script type="text/javascript" src="components/rating-bar.js"></script>
+    <script type="text/javascript" src="components/dropdown.js"></script>
+    <script type="text/javascript" src="components/multiple-choice.js"></script>
 </head>
 <body>
 <div id="app">
@@ -16,6 +18,14 @@
 
     <rating-bar v-model.number="rating"></rating-bar>
     <p v-if="rating" >Your rating is {{ rating }}</p>
+
+    <h2>Select your developer type</h2>
+    <dropdown name="devType" title="Dev Type" :options="devTypeOptions" v-model="devType" ></dropdown>
+    <p v-if="devType" >You are a {{ devTypeOptions[devType] }}</p>
+
+    <h2>Select your skills</h2>
+    <multiple-choice :options="skillOptions" v-model="skills" ></multiple-choice>
+    <p v-if="skills.length" >You know {{ skillsText }}</p>
 
 </div>
 <script type="text/javascript" >
@@ -29,7 +39,28 @@
 	        gender: null,
 
 	        rating: 1,
+
+            devType: null,
+            devTypeOptions: {
+                fullstack: 'Full Stack Developer',
+                frontend: 'Front End Developer',
+                backend: 'Back End Developer',
+            },
+
+            skillOptions: {
+                html: 'HTML',
+                css: 'CSS',
+                js: 'JavaScript',
+                vue: 'Vue.js',
+                laravel: 'Laravel',
+            },
+            skills: [],
         },
+        computed: {
+            skillsText() {
+                return this.skills.map(skill => this.skillOptions[skill]).join(', ');
+            },
+        }
     });
 </script>
 </body>
