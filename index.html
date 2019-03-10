@@ -23,6 +23,7 @@
     <radio-group title="Gender" name="gender" :options="this.genderOptions" v-model="gender" ></radio-group>
     <p v-if="gender != null" >You are {{ genderOptions[gender] }}</p>
 
+    <h2>Rate yourself</h2>
     <rating-bar v-model.number="rating"></rating-bar>
     <p v-if="rating" >Your rating is {{ rating }}</p>
 

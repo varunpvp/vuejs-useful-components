@@ -11,7 +11,7 @@ Vue.component('rating-bar', {
     },
     data() {
         return {
-            starSize: 64,
+            starSize: 32,
         }
     },
     template: `
