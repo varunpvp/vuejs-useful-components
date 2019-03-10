@@ -51,7 +51,7 @@ Vue.component('rating-bar', {
             let newRating = event.offsetX / this.starSize
             this.$emit(
                 'input',
-                Math.min(this.maxStars, Math.ceil(newRating / 0.5) * 0.5)
+                Math.ceil(newRating / 0.5) * 0.5
             )
         },
     },
