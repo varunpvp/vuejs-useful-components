@@ -5,23 +5,42 @@
     <title>Vue Component</title>
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="components/textfield.js"></script>
     <script type="text/javascript" src="components/radio-group.js"></script>
     <script type="text/javascript" src="components/rating-bar.js"></script>
+    <script type="text/javascript" src="components/dropdown.js"></script>
+    <script type="text/javascript" src="components/multiple-choice.js"></script>
 </head>
 <body>
 <div id="app">
 
+    <h2>Enter your name</h2>
+    <textfield title="Your name" v-model="name" ></textfield>
+    <p v-if="name" >Your name is {{ name }}</p>
+    <p v-else >Your name please</p>
+
+    <h2>Select your gender</h2>
     <radio-group title="Gender" name="gender" :options="this.genderOptions" v-model="gender" ></radio-group>
     <p v-if="gender != null" >You are {{ genderOptions[gender] }}</p>
 
+    <h2>Rate yourself</h2>
     <rating-bar v-model.number="rating"></rating-bar>
     <p v-if="rating" >Your rating is {{ rating }}</p>
+
+    <h2>Select your developer type</h2>
+    <dropdown name="devType" title="Dev Type" :options="devTypeOptions" v-model="devType" ></dropdown>
+    <p v-if="devType" >You are a {{ devTypeOptions[devType] }}</p>
+
+    <h2>Select your skills</h2>
+    <multiple-choice :options="skillOptions" v-model="skills" ></multiple-choice>
+    <p v-if="skills.length" >You know {{ skillsText }}</p>
 
 </div>
 <script type="text/javascript" >
     new Vue({
         el: '#app',
         data: {
+            name: '',
 	        genderOptions: {
 	            '0': 'Female',
 	            '1': 'Male',
@@ -29,7 +48,28 @@
 	        gender: null,
 
 	        rating: 1,
+
+            devType: null,
+            devTypeOptions: {
+                fullstack: 'Full Stack Developer',
+                frontend: 'Front End Developer',
+                backend: 'Back End Developer',
+            },
+
+            skillOptions: {
+                html: 'HTML',
+                css: 'CSS',
+                js: 'JavaScript',
+                vue: 'Vue.js',
+                laravel: 'Laravel',
+            },
+            skills: [],
         },
+        computed: {
+            skillsText() {
+                return this.skills.map(skill => this.skillOptions[skill]).join(', ');
+            },
+        }
     });
 </script>
 </body>
