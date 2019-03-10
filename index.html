@@ -19,6 +19,7 @@
     <p v-if="name" >Your name is {{ name }}</p>
     <p v-else >Your name please</p>
 
+    <h2>Select your gender</h2>
     <radio-group title="Gender" name="gender" :options="this.genderOptions" v-model="gender" ></radio-group>
     <p v-if="gender != null" >You are {{ genderOptions[gender] }}</p>
 
